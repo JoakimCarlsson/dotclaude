@@ -1,0 +1,4 @@
+settings.local.json
+skills/synced/
+*.bak-*
+.DS_Store

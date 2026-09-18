@@ -1,0 +1,13 @@
+- Follow relevant links in documentation links.
+- When changing any parameter name, make sure that its usages are updated with the new name. For example, changing an environment variable in the .env file MUST update the code using the old name to the new name.
+- Apply Dont Repeat Yourself (DRY). If you see a repeating pattern, extract it into a function. For example, several functions in the same class calling the same base URL and handling the response in the same way should use a shared function.
+- Always add an empty line at the end of a file.
+- NEVER MODIFY THE PACKAGE.JSON DIRECTLY, ALWAYS USE NPM I
+- AFTER MAKING CODE CHANGES, ALWAYS TRY TO BUILD THE PROJECT TO MAKE SURE IT BUILDS
+- ALWAYS USE CONTEXT7
+- NEVER run `git commit` (or `git push`) unless explicitly told to do so.
+- NEVER write comments inside a function body. No inline comments whatsoever.
+- ALWAYS document every function, both private and public, using the documentation standard of the language in question (e.g. Go doc comments as in the standard library, TSDoc/JSDoc for TypeScript, Doxygen-style for C++, `///` rustdoc for Rust, docstrings for Python). Look at how the language's standard library or idiomatic packages do it and follow that.
+- Repos never contain a CLAUDE.md. Project instructions live in AGENTS.md — always read AGENTS.md (including nested ones in subdirectories) and treat it as the project's instruction file. When asked to create or update project instructions, write AGENTS.md, never CLAUDE.md.
+- NEVER write tests unless explicitly told to do so.
+- Be brief. Keep responses short and to the point — no long explanations unless I explicitly ask for one.
