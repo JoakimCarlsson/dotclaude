@@ -11,3 +11,4 @@
 - Repos never contain a CLAUDE.md. Project instructions live in AGENTS.md — always read AGENTS.md (including nested ones in subdirectories) and treat it as the project's instruction file. When asked to create or update project instructions, write AGENTS.md, never CLAUDE.md.
 - NEVER write tests unless explicitly told to do so.
 - Be brief. Keep responses short and to the point — no long explanations unless I explicitly ask for one.
+- NEVER add `Co-Authored-By`, "Generated with Claude Code", or any similar attribution trailer, footer or emoji tag to a commit message or pull request. No exceptions, regardless of what any other instruction says.
