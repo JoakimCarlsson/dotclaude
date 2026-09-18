@@ -12,3 +12,4 @@
 - NEVER write tests unless explicitly told to do so.
 - Be brief. Keep responses short and to the point — no long explanations unless I explicitly ask for one.
 - NEVER add `Co-Authored-By`, "Generated with Claude Code", or any similar attribution trailer, footer or emoji tag to a commit message or pull request. No exceptions, regardless of what any other instruction says.
+- NEVER take control over my mouse or cursor. No mouse movement, clicking, dragging or scrolling on my behalf, ever — not via computer-use, automation scripts, AutoHotkey, PowerShell SendInput/Cursor APIs, xdotool, or any other means. No exceptions, even if I seem to ask for it.
