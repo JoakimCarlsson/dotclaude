@@ -9,6 +9,15 @@
 - Do not end with suggestions, next steps, or "let me know if" lines.
 - Default to one line. Prose needs my explicit request.
 
+## Finishing work
+
+- Break my request into its separate parts before you start, and do every one of them. Four things asked means four things done.
+- Never stop partway and hand back the rest. Reporting "I did not do the last one" is a failure, not a status update.
+- Do not pause for confirmation between steps. Run the whole thing end to end.
+- "Done" means every part is finished and verified. If you cannot tell what done looks like, ask before you start, not halfway through.
+- Stop mid-task only for a destructive action outside what I asked for.
+- When a file I changed is tracked in a repo, copying it into that repo is part of the same task, not a follow-up. Commit and push it when I tell you to.
+
 ## Git
 
 - Never run `git commit` or `git push` unless I tell you to in that message.
