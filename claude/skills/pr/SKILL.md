@@ -1,6 +1,6 @@
 ---
 name: pr
-description: Open a pull request from the current branch to the default branch, with a Why / Changes / Verification body. Use when the user asks to open, create, or raise a PR, or invokes /pr.
+description: Open a pull request from the current branch to the default branch, with a Summary body plus only the sections the change needs. Use when the user asks to open, create, or raise a PR, or invokes /pr.
 disable-model-invocation: false
 ---
 
@@ -29,23 +29,33 @@ Otherwise use the body format below, exactly.
 
 ## Body format
 
-Three level-2 headings, in this order, and nothing else. No preamble, no closing line, no
-extra sections, no checklists.
+The title says what changed, the description says why, and the diff shows how. Do not narrate the diff: write only what a reviewer could not work out from reading the changed files.
+
+Use only the sections the change needs, in this order. A small fix is often just the summary and the issue link. Never keep an empty or filler section.
 
 ```markdown
-## Why
+## Summary
 
 ## Changes
 
-## Verification
+## Review focus
+
+## Screenshots
+
+Closes #123
 ```
 
-- **Why** — the reason the change exists. One or two sentences. The problem or the request, not a retelling of the diff.
-- **Changes** — one bullet per meaningful change, each naming the file or area it touches. Skip mechanical noise (formatting, imports, generated files).
-- **Verification** — how it was checked: the build, lint or test command that was run and its result, or the manual steps taken. If it was not verified, say so in one line.
+- **Summary** — always present. What the PR does and why, in one to three sentences: the problem or the request, and the effect of the fix.
+- **Changes** — only when there is more than one meaningful change. One bullet per change, naming the file or area it touches. Skip mechanical noise (formatting, imports, generated files).
+- **Review focus** — only when something needs it: a design decision, a risky area, a known limitation, a migration or deployment step, or planned follow-up work.
+- **Screenshots** — only when the user has given you screenshots or a recording to include. Otherwise leave the section out entirely, even for UI changes: no heading, no placeholder.
+- **Issue link** — a bare `Closes #N` line at the end, with no heading, when the change resolves an issue. Take the number from the branch name (`task/<N>-…`) or from the commits. Use `Related to #N` for issues it only touches.
 
-Write plainly. No justification of decisions, no background, no alternatives considered, no
-notes on what was deliberately left out unless it blocks the reviewer.
+The user has tested the change before asking for the PR. Do not add a testing section, checklists, or lines like "not tested" or "verified manually". Mention new or changed automated tests as a bullet under Changes.
+
+Write plainly. No preamble, no closing line, no background the reviewer does not need, no alternatives considered.
+
+Never hard-wrap the body. GitHub reflows markdown to the reader's width, so a line broken at 80 characters renders as one long line with ragged spacing, and a wrapped bullet is harder to read in the diff. Write each paragraph and each bullet as a single unbroken line, however long, and let only real paragraph and list breaks end a line.
 
 ## Title
 
