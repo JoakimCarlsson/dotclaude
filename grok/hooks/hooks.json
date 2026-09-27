@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.grok/hooks/load-agents-md.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
