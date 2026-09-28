@@ -89,7 +89,6 @@ This is the opposite of an older "flat names only" rule — prefixes are *good* 
 | Prefix | Vocabulary | Question |
 |---|---|---|
 | `kind/` | **closed** — pick from canonical set | What type of work is this? |
-| `priority/` | **closed** — pick from canonical set | How urgent and over what timeframe? |
 | `triage/` | **closed** — pick from canonical set | What's the triage state? |
 | `lifecycle/` | **closed** — pick from canonical set | Is this still active? |
 | `area/` | **open** — derived per project | Which subsystem / component? |
@@ -103,13 +102,6 @@ Use the closed-vocabulary axes verbatim; don't invent new values unless the cano
 `kind/bug`, `kind/feature`, `kind/cleanup`, `kind/refactor`, `kind/regression`, `kind/flake`, `kind/failing-test`, `kind/documentation`, `kind/dependency`, `kind/deprecation`, `kind/design`, `kind/api-change`, `kind/support`, `kind/security`, `kind/performance`.
 
 Use `kind/feature` — **never bare `enhancement`**.
-
-**`priority/`** — urgency + timeframe, not severity:
-- `priority/critical-urgent` — drop everything; production-blocking or imminent harm
-- `priority/important-soon` — needed this milestone / next few weeks
-- `priority/important-longterm` — real work, no near-term deadline
-- `priority/backlog` — would-be-nice, not scheduled
-- `priority/awaiting-more-evidence` — promoted only when we know more
 
 Never use bare `high`/`low`/`medium` — they encode severity without timeframe and degrade into noise.
 
@@ -127,7 +119,7 @@ Never use bare `high`/`low`/`medium` — they encode severity without timeframe 
 
 #### Missing-metadata flags ("needs-X")
 
-First-class anti-labels marking that triage isn't complete: `needs-triage`, `needs-kind`, `needs-priority`, `needs-area`, `needs-repro`, `needs-design`. Make these explicit instead of leaving the issue unlabeled.
+First-class anti-labels marking that triage isn't complete: `needs-triage`, `needs-kind`, `needs-area`, `needs-repro`, `needs-design`. Make these explicit instead of leaving the issue unlabeled.
 
 #### Unprefixed namespace
 
@@ -137,7 +129,7 @@ Reserve unprefixed labels for **process / bot signals**, not taxonomy:
 ### Choosing labels for a new project or batch
 
 1. Run `gh label list` to see what already exists.
-2. Decide which axes apply. Most batches want `kind/` + `area/`. Add `priority/` only if **issues in the batch actually vary across that axis** — if every issue in a foundation/bootstrap batch is by definition urgent (nothing works without it), priority is wallpaper and should be skipped. Add `triage/` if there's a real triage workflow. Skip axes the project doesn't use — don't apply `triage/accepted` if nobody's running triage.
+2. Decide which axes apply. Most batches want `kind/` + `area/`. Never add priority labels of any kind. Add `triage/` if there's a real triage workflow. Skip axes the project doesn't use — don't apply `triage/accepted` if nobody's running triage.
 3. For open-ended axes (`area/`), inspect the codebase and pick names that match its natural components.
 4. Create missing labels with `gh label create`. Closed-axis labels follow the canonical names above. Open-axis labels follow the project.
 5. Apply per-issue: one value per axis that applies.
@@ -145,7 +137,7 @@ Reserve unprefixed labels for **process / bot signals**, not taxonomy:
 ### Anti-patterns
 
 - **Blanket `kind/feature`** (or any single label) on every issue in a feature breakdown — that's fine as long as **other axes distinguish them**. Uniformity is only a problem if it's the *only* label, or if no other axis varies.
-- **Bare `high`** or freeform priority — use the `priority/` vocabulary or skip the axis entirely.
+- **Any priority label** (`priority/*`, `high`, `low`, `P1`...) — never create or apply one.
 - **Bare `enhancement`** — use `kind/feature`.
 - **Copying area labels** from another project's domain.
 - **`task` / `todo`** as labels — every issue is a task.
@@ -162,11 +154,11 @@ Reserve unprefixed labels for **process / bot signals**, not taxonomy:
 ```bash
 gh label list
 gh label create "<prefix/value>" --description "<short description>" --color "<hex without #>"
-gh issue edit <num> --add-label "kind/bug,area/cache,priority/important-soon"
+gh issue edit <num> --add-label "kind/bug,area/cache"
 gh issue edit <num> --remove-label "<label>"
 ```
 
-Hex colors without `#`. Consider a consistent color per prefix (all `kind/*` one color, all `priority/*` another) so the issue list reads quickly.
+Hex colors without `#`. Consider a consistent color per prefix (all `kind/*` one color, all `area/*` another) so the issue list reads quickly.
 
 ---
 
@@ -219,11 +211,10 @@ gh issue create --title "Clear, specific title" --body-file <path>
 - Omit the "How to verify" section — every issue needs runnable proof of completion, executed locally before the PR is opened.
 - Write "verify after merging" — verification always happens locally before the PR is opened.
 - Apply bare `enhancement` — use `kind/feature`.
-- Apply bare `high`/`medium`/`low` — use the `priority/` vocabulary (urgency + timeframe) or skip the axis.
+- Create or apply any priority label (`priority/*`, `high`/`medium`/`low`, `P1`...).
 - Invent a prefix without a real axis behind it (`mything/value` with no other `mything/*` labels is just a flat label with a slash in it).
 - Blanket-apply the same label across a series with no other axis varying — uniformity in *every* axis is noise.
 - Apply triage/lifecycle labels reflexively in a project that doesn't run that workflow.
-- Apply `priority/*` to a bootstrap/foundation batch where every issue is uniformly urgent. If the axis doesn't vary, it carries no signal — skip it and reintroduce when triaging a backlog with actual priority differences.
 - Create or apply dependency labels (`blocked-by`, `blocks`, `foundation`, `parallel`). Encode ordering in the issue body instead.
 - Add a comment that restates a dependency already in the body. The Dependencies / notes section is the single source of truth; a comment that echoes it is duplication that goes stale. Comment only for genuinely new info that arises after creation.
 - Reference a related issue by a descriptive name ("the auth issue") when the issue exists. Always use its `#number` so it auto-links. If the bodies were written before numbers existed, do the second pass to swap names for `#numbers` — don't ship the named version.
