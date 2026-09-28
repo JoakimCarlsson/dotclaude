@@ -131,7 +131,7 @@ Reserve unprefixed labels for **process / bot signals**, not taxonomy:
 1. Run `gh label list` to see what already exists.
 2. Decide which axes apply. Most batches want `kind/` + `area/`. Never add priority labels of any kind. Add `triage/` if there's a real triage workflow. Skip axes the project doesn't use — don't apply `triage/accepted` if nobody's running triage.
 3. For open-ended axes (`area/`), inspect the codebase and pick names that match its natural components.
-4. Create missing labels with `gh label create`. Closed-axis labels follow the canonical names above. Open-axis labels follow the project.
+4. Create only the labels missing from that list with `gh label create`. Never recreate or overwrite an existing label, and do not create a near-duplicate of one (`area/api` when `area/backend-api` exists) — reuse it, or change it with `gh label edit` only if the user asks. Closed-axis labels follow the canonical names above. Open-axis labels follow the project.
 5. Apply per-issue: one value per axis that applies.
 
 ### Anti-patterns
@@ -192,6 +192,31 @@ Part of the "user auth" series: #10 → #11 → #12 → #13 (this) → #14.
 
 ## Creating Issues
 
+### Check for existing issues first
+
+Before creating any issue, search the repo for one that already covers the same work, open or closed:
+
+```bash
+gh issue list --state all --limit 200 --json number,title,state,labels
+gh issue list --state all --search "<key terms> in:title,body" --json number,title,state,url
+gh pr list --state all --search "<key terms>" --json number,title,state,url
+```
+
+Search by the key terms of the work, not only the exact title — a duplicate is often worded differently. Then, for each planned issue:
+
+- **Open issue already covers it** — do not create a new one. If the existing body is missing scope, acceptance criteria or verification steps from the request, update it with `gh issue edit <num> --body-file`, keeping what is already there. Reuse its `#number` in every cross-reference.
+- **Closed as completed, and the work is in the codebase** — do not recreate it. Report it as already done.
+- **Closed, but the work is not done** (closed as not planned, or the fix regressed) — reopen it with `gh issue reopen <num>` and update the body, rather than filing a copy. Report that you reopened it.
+- **Open PR already implements it** — do not create an issue for it. Report the PR.
+- **Partial overlap** — create the new issue for the remaining work only, and link the existing one in Dependencies / notes with its `#number`.
+- **Unsure whether it is the same work** — ask the user before creating it.
+
+The same applies when re-running a batch that partly failed: list what exists, create only what is missing, and never create a second copy of an issue from the first run.
+
+After the pass, report every issue by number and say which ones were created, updated, reopened or skipped as duplicates.
+
+### Create
+
 ```bash
 gh issue create --title "Clear, specific title" --body-file <path>
 ```
@@ -205,6 +230,8 @@ gh issue create --title "Clear, specific title" --body-file <path>
 
 ## Do Not
 
+- Create an issue without first searching open and closed issues and PRs for one that already covers the work. Update, reopen or reuse the existing issue instead of filing a duplicate.
+- Create a label that already exists, or a near-duplicate of one.
 - Hard-wrap prose at ~80 columns in an issue body — write each paragraph as one unbroken line and let GitHub reflow it to full width.
 - Write vague acceptance criteria like "it works" — every criterion must be binary and testable.
 - Create an issue whose implementation leaves the project in a broken/non-runnable state mid-series.
