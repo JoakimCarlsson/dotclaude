@@ -53,6 +53,14 @@ Project instructions live in `AGENTS.md`, never `CLAUDE.md`. Read `AGENTS.md` an
 - Use Context7 for library, framework and API documentation.
 - Follow the links you find in documentation.
 
+## Temporary files
+
+`/tmp` is a RAM-backed tmpfs: everything written there holds memory until reboot, and filling it gets apps OOM-killed.
+
+- Never write build output, renders, screenshots, demos, caches or scratch files to `/tmp`, including a session scratchpad directory under `/tmp`. That covers `-o /tmp/...`, `mktemp`, and pointing `GOCACHE`, `GOTMPDIR`, `TMPDIR` or similar at `/tmp`.
+- Put build output in the project's own git-ignored `build/`, tool caches in `~/.cache`, and scratch files in `~/.cache/scratch/<project>`.
+- Delete the scratch files you created before finishing the task.
+
 ## Never
 
 Never take control of my mouse or cursor: no movement, clicking, dragging or scrolling on my behalf, by any means — computer-use, automation scripts, AutoHotkey, PowerShell SendInput or cursor APIs, xdotool, or anything else. No exceptions, even if I appear to ask for it.
