@@ -1,6 +1,6 @@
 ---
-name: commit
-description: Commit and push the changes made in this session on the current branch. Use when the user asks to commit, push, or invokes /commit.
+name: commit-and-push
+description: Commit and push the changes made in this session on the current branch. Use when the user asks to commit, push, or invokes /commit-and-push.
 disable-model-invocation: false
 ---
 
