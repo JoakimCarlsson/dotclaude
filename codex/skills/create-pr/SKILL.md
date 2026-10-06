@@ -1,6 +1,6 @@
 ---
-name: pr
-description: Open a pull request from the current branch to the default branch, with a Summary body plus only the sections the change needs. Use when the user asks to open, create, or raise a PR, or invokes /pr.
+name: create-pr
+description: Open a pull request from the current branch to the default branch, with a Summary body plus only the sections the change needs. Use when the user asks to open, create, or raise a PR, or invokes /create-pr.
 ---
 
 # Pull Request
