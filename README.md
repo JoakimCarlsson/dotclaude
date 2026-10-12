@@ -8,7 +8,7 @@ My custom Claude Code, Codex, and Grok configuration.
 | --- | --- |
 | `claude/` | Global Claude Code instructions, settings, hooks, agents, and skills |
 | `codex/AGENTS.md` | Global Codex instructions applied to every repository |
-| `codex/skills/` | Global Codex skills such as `$commit`, `$issue`, `$pr`, and `$write` |
+| `codex/skills/` | Global Codex skills such as `$commit-and-push`, `$task`, `$task-write`, `$create-pr`, and `$write` |
 | `grok/` | Global Grok instructions, hooks, agents, and skills |
 
 ## Install
