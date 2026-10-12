@@ -26,11 +26,14 @@ If neither is given, ask for the task.
    - leading/trailing `-` stripped
    - truncated to 60 characters at a `-` boundary
 3. Make sure the working tree is clean (`git status --porcelain`). If it is not, stop and report — do not stash or discard.
-4. `git fetch origin`, then branch off the default branch's remote head, not the local checkout:
-   `git checkout -b task/<number>-<slug> origin/<default>`
-   - If the branch already exists locally, check it out instead of recreating it.
-   - If it exists on the remote, check out a tracking branch.
+4. Note the starting branch with `git branch --show-current`. If it is empty (detached HEAD), stop and ask which branch to base on. The task branch starts from it, not from the default branch.
+   Create the branch through the issue, so GitHub links it under the issue's Development section the moment it exists:
+   `gh issue develop NUMBER [--repo OWNER/REPO] --name task/<number>-<slug> --base <start>`
+   then `git fetch origin` and `git checkout -b task/<number>-<slug> --track origin/task/<number>-<slug>`.
+   - Never post a comment on the issue to "link" it.
+   - If the branch already exists locally or on the remote, check it out instead (a tracking branch for a remote one) and skip `gh issue develop`; it cannot link an existing branch.
    - Never force-create (`git checkout -B`) over an existing branch.
+   - If `gh issue develop` fails (for example, the starting branch is not pushed), report why, then fall back to `git checkout -b task/<number>-<slug> <start>`.
 
 Report the branch name before moving on.
 
