@@ -27,6 +27,14 @@ All three configurations include the same skills:
 
 Invoke skills with `/skill-name` in Claude Code and Grok, or `$skill-name` in Codex.
 
+## Rules
+
+Rules are always-on instructions. Claude Code and Grok load them from a `rules/` folder; Codex has no rules folder, so the same content sits inside `codex/AGENTS.md`.
+
+| Rule | What it does |
+| --- | --- |
+| `lean` | Solve the whole problem with the least new code: read and trace the flow first, skip, reuse or use the platform before writing, change only what the task needs, and verify the build before calling it done |
+
 ## Install
 
 These steps are written for an AI agent to follow. Run them from a clone of this repository:
