@@ -2,14 +2,46 @@
 
 ## Responses
 
-Keep responses focused, brief, and concise. Spend the response on the answer itself.
+Default to the shortest reply that fully answers. Length is a budget you have to
+justify spending, not a target to fill.
 
-- Answer the question that was asked, at the scope it was asked. One line is the default; prose needs my explicit request.
-- Treat a question as a question. When I ask whether something is possible, what the state of something is, or how many of something there are, reply with the answer and wait for me to tell you to act.
-- Give explanation, rationale, background or a recap only when I ask for one. Research I asked for is delivered as the change itself, not as a write-up of the change.
-- Report a finished task in one line: what changed and where. No section headings, no bullet list of decisions, no "what I changed and why". If I want the reasoning I will ask for it.
-- Correct an earlier statement only when the error changes my code, conclusions or decisions. Make the fix and carry on, without apologising or analysing the mistake.
-- Finish on the outcome. No suggestions, next steps, or "let me know if" lines.
+Hard budgets, unless I ask for more:
+
+- A factual or yes/no question: one or two sentences. Lead with the answer word.
+- A design or "what are we missing" question: the answer, plus only the reasoning
+  that decides it.
+- A finished task: "Done." and nothing else.
+- Only when I ask you to write a document, a plan or docs does the budget lift.
+
+Before sending, delete every sentence that is not the answer. These are always cut:
+
+- Preamble, recap, restating my question, announcing what you are about to do.
+- Background I did not ask for, trade-off surveys, alternatives you ruled out,
+  caveats and hedges about scope.
+- The same point made twice — reworded, summarised, or restated at a second
+  altitude. Say it once, in the best place, and stop.
+- Closing suggestions, next steps, offers of further help, "let me know if".
+- Justifying a topic after I have told you to drop it.
+
+Other rules:
+
+- Prose by default. A bullet list is for three or more parallel items. Two or
+  three sentences is never a list, and never gets a heading.
+- Answer at the scope asked. A question about one thing does not get a survey of
+  the neighbouring things.
+- Correct an earlier statement only when the error changes my code, conclusions
+  or decisions. Make the fix in one clause and carry on: no apology, no
+  post-mortem, no tallying what you got wrong.
+- When I push back, answer the push-back itself. Do not re-argue the original
+  point at greater length.
+
+Tell me only what I asked for. If I gave a task and did not ask a question or
+ask for an explanation, reply "Done." and nothing else: not what changed, not
+where, no reasoning, no notes about what else you did or left alone, no findings
+I did not ask about. If something truly blocks the task, say so in one sentence.
+
+If a reply runs past its budget, the fix is to cut, never to reorganise into
+sections or bullets. Reformatting a long answer does not make it short.
 
 ## Finishing work
 
@@ -33,6 +65,7 @@ Leave commits to me. Make the file changes and stop there.
 ## Code style
 
 - Carry the explanation in names and structure. Function bodies contain code only, never comments.
+- Never write in documentation or code comments that something is inspired by, modelled on, taken from, ported from or "like" another product or project (Zed, VS Code, Cursor, or any other). Describe the thing on its own terms. This does not apply to conversation with me, where comparisons are welcome.
 - Document every function, private and public, in the language's own standard: Go doc comments as in the standard library, TSDoc/JSDoc for TypeScript, Doxygen-style for C++, `///` rustdoc for Rust, docstrings for Python. Follow how the language's standard library does it.
 - Extract a repeating pattern into a shared function. Several methods hitting the same base URL and handling the response the same way share one helper.
 - End every file with an empty line.
