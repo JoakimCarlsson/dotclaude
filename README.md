@@ -8,7 +8,7 @@ My custom Claude Code, Codex, and Grok configuration.
 | --- | --- |
 | `claude/` | Global Claude Code instructions, rules, settings, hooks, and skills |
 | `codex/AGENTS.md` | Global Codex instructions applied to every repository |
-| `codex/skills/` | Global Codex skills for Git, GitHub tasks, pull requests, and writing |
+| `codex/skills/` | Global Codex skills for Git, GitHub tasks, and pull requests |
 | `grok/` | Global Grok instructions, rules, hooks, and skills |
 
 ## Skills
@@ -24,7 +24,6 @@ All three configurations include the same skills:
 | `task-write` | Create and edit GitHub issues and labels |
 | `create-pr` | Open a pull request to the default branch |
 | `create-pr-draft` | Open a draft pull request to the default branch |
-| `write` | Write text in my voice |
 
 Invoke skills with `/skill-name` in Claude Code and Grok, or `$skill-name` in Codex.
 
