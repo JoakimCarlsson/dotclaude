@@ -6,10 +6,10 @@ My custom Claude Code, Codex, and Grok configuration.
 
 | Path | What it is |
 | --- | --- |
-| `claude/` | Global Claude Code instructions, rules, settings, hooks, agents, and skills |
+| `claude/` | Global Claude Code instructions, rules, settings, hooks, and skills |
 | `codex/AGENTS.md` | Global Codex instructions applied to every repository |
 | `codex/skills/` | Global Codex skills for Git, GitHub tasks, pull requests, and writing |
-| `grok/` | Global Grok instructions, rules, hooks, agents, and skills |
+| `grok/` | Global Grok instructions, rules, hooks, and skills |
 
 ## Skills
 
@@ -47,13 +47,12 @@ Global files apply to every repository for the current user.
 2. Copy the files:
 
 ```sh
-mkdir -p ~/.claude ~/.codex/skills ~/.grok/rules ~/.grok/skills ~/.grok/agents ~/.grok/hooks
+mkdir -p ~/.claude ~/.codex/skills ~/.grok/rules ~/.grok/skills ~/.grok/hooks
 cp -R claude/. ~/.claude/
 cp codex/AGENTS.md ~/.codex/AGENTS.md
 cp -R codex/skills/. ~/.codex/skills/
 cp grok/AGENTS.md ~/.grok/AGENTS.md
 cp -R grok/rules/. ~/.grok/rules/
-cp grok/agents/code-reviewer.md ~/.grok/agents/
 cp grok/hooks/load-agents-md.sh grok/hooks/hooks.json ~/.grok/hooks/
 cp -R grok/skills/. ~/.grok/skills/
 ```
