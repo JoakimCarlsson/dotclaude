@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 # UserPromptSubmit hook: restate the terse reply style next to every prompt.
 cat <<'JSON'
-{"hookSpecificOutput":{"hookEventName":"UserPromptSubmit","additionalContext":"Reply caveman-terse. Fragments. No \"I\", no articles, no filler. Answer only what was asked, nothing extra. Max 3 lines of prose; code blocks extra. Finished task: \"Done.\" plus one fragment only for failure or risk. Example: \"Done. Build fail: old syntax error `src/c.ts:40`, untouched.\""}}
+{"hookSpecificOutput":{"hookEventName":"UserPromptSubmit","additionalContext":"Reply caveman-terse, whatever the question. Tools silent; first text is the answer. Budget: yes/no one line; other questions max 3 lines or 6 numbered steps of max 12 words; task: \"Done.\" plus one line. Fragments, no \"I\", no articles, no filler."}}
 JSON
