@@ -6,7 +6,7 @@ My custom Claude Code, Codex, and Grok configuration.
 
 | Path | What it is |
 | --- | --- |
-| `claude/` | Global Claude Code instructions, rules, settings, hooks, and skills |
+| `claude/` | Global Claude Code instructions, output style, rules, settings, hooks, and skills |
 | `codex/AGENTS.md` | Global Codex instructions applied to every repository |
 | `codex/skills/` | Global Codex skills for Git, GitHub tasks, and pull requests |
 | `grok/` | Global Grok instructions, rules, hooks, and skills |
@@ -35,6 +35,16 @@ Rules are always-on instructions. Claude Code and Grok load them from a `rules/`
 | --- | --- |
 | `lean` | Solve the whole problem with the least new code: read and trace the flow first, skip, reuse or use the platform before writing, change only what the task needs, and verify the build before calling it done |
 
+## Output style
+
+`claude/output-styles/terse.md` sets how Claude Code replies: caveman-terse, answer only, "Done." for finished tasks. `outputStyle` in `claude/settings.json` selects it, and the `terse-reminder.sh` UserPromptSubmit hook restates it next to every prompt. Both are needed: the style alone barely changed replies in testing. Codex and Grok have no output style, so the same text is the Responses section of their `AGENTS.md`. Grok discards `UserPromptSubmit` hook output, so it gets no per-prompt reminder. Codex narrates before tool calls unless `~/.codex/config.toml` sets, at top level:
+
+```toml
+developer_instructions = "Never write text before or between tool calls: no \"Checking…\", \"Looking at…\", \"I'll…\". Call tools silently. First text you write is the final answer."
+```
+
+Grok narrates anyway: neither `AGENTS.md` nor `--rules` stops it.
+
 ## Install
 
 These steps are written for an AI agent to follow. Run them from a clone of this repository:
@@ -44,7 +54,7 @@ git clone git@github.com:JoakimCarlsson/dotclaude.git
 cd dotclaude
 ```
 
-The session hooks require Bash, Git, and `jq`. GitHub workflows use the authenticated `gh` CLI.
+The session hooks require Bash and Git. GitHub workflows use the authenticated `gh` CLI.
 
 ### Global install
 
@@ -64,7 +74,7 @@ cp grok/hooks/load-agents-md.sh grok/hooks/hooks.json ~/.grok/hooks/
 cp -R grok/skills/. ~/.grok/skills/
 ```
 
-3. In `~/.claude/settings.json`, set the `SessionStart` hook command to the absolute path of `~/.claude/hooks/load-agents-md.sh` for the current user. The Grok hook already uses `$HOME`.
+3. In `~/.claude/settings.json`, set the `SessionStart` and `UserPromptSubmit` hook commands to the absolute paths of `~/.claude/hooks/load-agents-md.sh` and `~/.claude/hooks/terse-reminder.sh` for the current user. The Grok hook already uses `$HOME`.
 4. Make the hook scripts executable: `chmod +x ~/.claude/hooks/*.sh ~/.grok/hooks/*.sh`.
 5. Start a new session in each tool and confirm it loaded the instructions. In Grok, `grok inspect` lists the rules, skills, and hooks it found.
 

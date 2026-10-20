@@ -48,7 +48,7 @@ Closes #123
 - **Summary** — always present. What the PR does and why, in one to three sentences: the problem or the request, and the effect of the fix.
 - **Changes** — only when there is more than one meaningful change. One bullet per change, naming the file or area it touches. Skip mechanical noise (formatting, imports, generated files).
 - **Review focus** — only when something needs it: a design decision, a risky area, a known limitation, a migration or deployment step, or planned follow-up work.
-- **Screenshots** — only when the user has given you screenshots or a recording to include. Otherwise leave the section out entirely, even for UI changes: no heading, no placeholder.
+- **Screenshots** — only when the user has given you screenshots or a recording to include, or asked you to capture them (see Images and video). Otherwise leave the section out entirely, even for UI changes: no heading, no placeholder.
 - **Issue link** — a bare `Closes #N` line at the end, with no heading, when the change resolves an issue. Take the number from the branch name (`task/<N>-…`) or from the commits. Use `Related to #N` for issues it only touches.
 
 The user has tested the change before asking for the PR. Do not add a testing section, checklists, or lines like "not tested" or "verified manually". Mention new or changed automated tests as a bullet under Changes.
@@ -56,6 +56,16 @@ The user has tested the change before asking for the PR. Do not add a testing se
 Write plainly. No preamble, no closing line, no background the reviewer does not need, no alternatives considered.
 
 Never hard-wrap the body. GitHub reflows markdown to the reader's width, so a line broken at 80 characters renders as one long line with ragged spacing, and a wrapped bullet is harder to read in the diff. Write each paragraph and each bullet as a single unbroken line, however long, and let only real paragraph and list breaks end a line.
+
+## Images and video
+
+Capture screenshots or a recording when the user asks for them, and attach any the user gives you.
+
+- Capture on macOS with `screencapture`, which never moves the cursor: `screencapture -x shot.png` for the whole screen, `-R x,y,w,h` for a region, `-l <window-id>` for one window, and `screencapture -x -v -V 5 clip.mov` for a five-second recording. Never use the interactive modes (`-i`, `-W`), which wait for the mouse. On other platforms use the system's own screenshot tool.
+- Save captures under `~/.cache/scratch/<project>/`, never `/tmp`, and delete them after the upload.
+- Upload with `--attach <file>`, once per file. It needs gh 2.99 or later: check `gh --version` and run `brew upgrade gh` if it is older. gh uploads each file and replaces its local reference in the body with a `github.com/user-attachments` URL, so reference it by the same path you pass to `--attach`.
+- An image goes in as `![What it shows](shot.png)`. A video goes in as `![](clip.mov)` alone in its own paragraph, which renders as a player; inside a sentence it renders as a link. Videos must be MP4, MOV or WebM. Attached files the body does not reference are appended at the end.
+- Pass `--attach` to `gh pr edit` or `gh pr comment` to add media to a PR that already exists.
 
 ## Title
 
@@ -78,7 +88,7 @@ including a Conventional Commits prefix if `git log` or the open PRs use one.
 
 ```bash
 gh pr create --base "$(gh repo view --json defaultBranchRef -q .defaultBranchRef.name)" \
-  --draft --title "<title>" --body-file <file>
+  --draft --title "<title>" --body-file <file> [--attach <file> ...]
 ```
 
 Write the body to a scratch file under `~/.cache/scratch/`, never `/tmp`, and delete it afterwards, rather than passing it inline, so the markdown survives
