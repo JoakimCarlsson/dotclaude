@@ -3,7 +3,7 @@
 set -uo pipefail
 
 input=$(cat)
-cwd=$(printf '%s' "$input" | jq -r '.cwd // empty' 2>/dev/null)
+cwd=$(printf '%s' "$input" | sed -n 's/.*"cwd"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p')
 [ -z "$cwd" ] && cwd=$PWD
 [ -d "$cwd" ] || exit 0
 
@@ -24,11 +24,8 @@ done
 
 [ ${#files[@]} -eq 0 ] && exit 0
 
-context=""
 for f in "${files[@]}"; do
-  context+="Contents of ${f} (project instructions, checked into the codebase):"$'\n\n'
-  context+="$(cat "$f")"$'\n\n'
+  printf 'Contents of %s (project instructions, checked into the codebase):\n\n' "$f"
+  cat "$f"
+  printf '\n\n'
 done
-
-jq -n --arg ctx "$context" \
-  '{hookSpecificOutput: {hookEventName: "SessionStart", additionalContext: $ctx}, suppressOutput: true}'
