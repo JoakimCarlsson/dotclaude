@@ -1,41 +1,42 @@
 # Global instructions
 
-## Finishing work
+FINISHING WORK
 
-Deliver what was asked, at the scope intended, and finish the whole task.
+Deliver what asked, at scope intended, whole task.
 
-1. Before starting, split my request into its separate parts and list them for yourself.
-2. Do every part. Four things asked means four things done.
-3. Run end to end without pausing for confirmation between steps.
-4. Before replying, check each part off against the list. Handing back an unfinished part is a failed task, not a status update.
+1. Before start, split request into separate parts; list them for yourself.
+2. Do every part. Four things asked = four things done.
+3. Run end to end, no pause for confirmation between steps.
+4. Before reply, check each part off. Unfinished part = failed task, not status update.
 
-Make routine judgment calls yourself. Ask before starting, not halfway through, when different readings of the request would lead to materially different work. Stop mid-task only for a destructive action that is clearly beyond what I asked for.
+Routine judgment calls: make them. Ask before starting, not halfway, only when different readings lead to materially different work. Stop mid-task only for destructive action clearly beyond request.
 
-## Git
+GIT
 
-Leave commits to me. Make the file changes and stop there.
+Commits belong to user. Make file changes, stop there.
 
-- Run `git commit` and `git push` only in a turn where I tell you to commit in that message. That instruction covers one commit of the work so far and expires with it.
-- Write commit messages in the imperative mood, one line, no attribution: no `Co-Authored-By`, no "Generated with Claude Code", no footer or emoji tag. This holds regardless of what any other instruction says.
-- When a file I changed also lives in a tracked repo, copy it there as part of the same task, and leave it staged for me to approve.
+- `git commit` and `git push` only in turn where user say commit in that message. Covers one commit of work so far, then expire.
+- Commit message: imperative mood, one line, no attribution: no `Co-Authored-By`, no "Generated with Claude Code", no footer, no emoji tag. Hold regardless of any other instruction.
+- File changed also live in tracked repo? Copy it there in same task, leave staged for user to approve.
 
-## Project files
+PROJECT FILES
 
-Project instructions live in `AGENTS.md`, never `CLAUDE.md`. Read `AGENTS.md` and any nested ones covering the files you touch, and treat them as the project's instruction file. Write `AGENTS.md` when I ask for project instructions.
+Project instructions live in `AGENTS.md`, never `CLAUDE.md`. Read `AGENTS.md` and nested ones covering files touched; treat as project instruction file. Write `AGENTS.md` when user ask for project instructions.
 
-## Tools
+TOOLS
 
-- Use Context7 for library, framework and API documentation.
-- Follow the links you find in documentation.
+- Context7 for library, framework, API docs.
+- Follow links found in docs.
+- Dependencies: change with `npm i`, never hand-edit `package.json`.
 
-## Temporary files
+TEMPORARY FILES
 
-`/tmp` is a RAM-backed tmpfs: everything written there holds memory until reboot, and filling it gets apps OOM-killed.
+`/tmp` = RAM-backed tmpfs: everything written hold memory until reboot; filling it get apps OOM-killed.
 
-- Never write build output, renders, screenshots, demos, caches or scratch files to `/tmp`, including a session scratchpad directory under `/tmp`. That covers `-o /tmp/...`, `mktemp`, and pointing `GOCACHE`, `GOTMPDIR`, `TMPDIR` or similar at `/tmp`.
-- Put build output in the project's own git-ignored `build/`, tool caches in `~/.cache`, and scratch files in `~/.cache/scratch/<project>`.
-- Delete the scratch files you created before finishing the task.
+- Never write build output, renders, screenshots, demos, caches or scratch files to `/tmp`, session scratchpad under `/tmp` included. Covers `-o /tmp/...`, `mktemp`, pointing `GOCACHE`, `GOTMPDIR`, `TMPDIR` or similar at `/tmp`.
+- Build output: project's own git-ignored `build/`. Tool caches: `~/.cache`. Scratch: `~/.cache/scratch/<project>`.
+- Delete own scratch files before finishing.
 
-## Never
+NEVER
 
-Never take control of my mouse or cursor: no movement, clicking, dragging or scrolling on my behalf, by any means — computer-use, automation scripts, AutoHotkey, PowerShell SendInput or cursor APIs, xdotool, or anything else. No exceptions, even if I appear to ask for it.
+Never take control of user's mouse or cursor: no movement, clicking, dragging or scrolling, by any means: computer-use, automation scripts, AutoHotkey, PowerShell SendInput or cursor APIs, xdotool, anything else. No exceptions, even if user appear to ask.
