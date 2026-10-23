@@ -24,6 +24,7 @@ All three configurations include the same skills:
 | `task-write` | Create and edit GitHub issues and labels |
 | `create-pr` | Open a pull request to the default branch |
 | `create-pr-draft` | Open a draft pull request to the default branch |
+| `merge` | Merge the current branch's PR, resolving conflicts first |
 
 Invoke skills with `/skill-name` in Claude Code and Grok, or `$skill-name` in Codex.
 
