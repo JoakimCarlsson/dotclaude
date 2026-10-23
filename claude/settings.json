@@ -10,16 +10,6 @@
           }
         ]
       }
-    ],
-    "UserPromptSubmit": [
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/Users/joakimcarlsson/.claude/hooks/terse-reminder.sh"
-          }
-        ]
-      }
     ]
   },
   "enabledPlugins": {
@@ -35,6 +25,5 @@
       "effortLevel": "medium"
     }
   },
-  "skipDangerousModePermissionPrompt": true,
-  "outputStyle": "terse"
+  "skipDangerousModePermissionPrompt": true
 }
